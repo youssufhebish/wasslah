@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:social_media_application/cubit/cubit.dart';
 import 'package:social_media_application/shared/styles/icons_broken.dart';
 
-import '../../constants.dart';
+import 'package:social_media_application/shared/constants.dart';
+
 
 Widget postElement({
   @required BuildContext context,

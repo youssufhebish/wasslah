@@ -5,6 +5,7 @@ import 'package:social_media_application/shared/constants.dart';
 import 'package:social_media_application/shared/styles/icons_broken.dart';
 
 class AddPostScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     var c = AppCubit.get(context).model;
@@ -44,7 +45,7 @@ class AddPostScreen extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: a.profileImage == null? NetworkImage(c.image) : FileImage(a.profileImage),
+                  backgroundImage: NetworkImage(c.image),
                   radius: 25.0,
                 ),
                 SizedBox(

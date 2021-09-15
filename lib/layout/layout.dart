@@ -13,57 +13,60 @@ class Layout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          AppCubit.get(context).title[AppCubit.get(context).currentIndex],
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.white,
-      ),
-      body: ConditionalBuilder(
-        condition: AppCubit.get(context).model != null,
-        fallback: (context) => Center(child: CircularProgressIndicator(),),
-        builder: (context){
-          return AppCubit.get(context).screens[AppCubit.get(context).currentIndex];
+    return BlocConsumer<AppCubit, AppStates>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(
+                AppCubit.get(context).title[AppCubit.get(context).currentIndex],
+                style: TextStyle(color: Colors.black),
+              ),
+              backgroundColor: Colors.white,
+            ),
+            body: ConditionalBuilder(
+              condition: AppCubit.get(context).model != null,
+              fallback: (context) => Center(child: CircularProgressIndicator(),),
+              builder: (context){
+                return AppCubit.get(context).screens[AppCubit.get(context).currentIndex];
+              },
+            ),
+            bottomNavigationBar: BottomNavigationBar(
+              currentIndex: AppCubit.get(context).currentIndex,
+              onTap: (i) {
+                AppCubit.get(context).indexChange(i);
+              },
+              selectedItemColor: kPrimaryColor,
+              unselectedItemColor: Colors.grey,
+              backgroundColor: Colors.white,
+              type: BottomNavigationBarType.fixed,
+              elevation: 0.0,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(IconBroken.Home),
+                  label: 'feeds'.toLowerCase(),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(IconBroken.Chat),
+                  label: 'Chat'.toLowerCase(),
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(IconBroken.Profile),
+                  label: 'profile'.toLowerCase(),
+                ),
+              ],
+            ),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(IconBroken.Plus),
+              backgroundColor: kPrimaryColor,
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostScreen()),);
+                print(AppCubit.get(context).model.image);
+                print(AppCubit.get(context).model.name);
+              },
+            ),
+          );
         },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: AppCubit.get(context).currentIndex,
-        onTap: (i) {
-          AppCubit.get(context).indexChange(i);
-        },
-        selectedItemColor: kPrimaryColor,
-        unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
-        elevation: 0.0,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(IconBroken.Home),
-            label: 'feeds'.toLowerCase(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconBroken.Chat),
-            label: 'Chat'.toLowerCase(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconBroken.Notification),
-            label: 'Notification'.toLowerCase(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconBroken.Profile),
-            label: 'profile'.toLowerCase(),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(IconBroken.Plus),
-        backgroundColor: kPrimaryColor,
-        onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AddPostScreen()),);
-        },
-      ),
-    );
+      );
   }
 }

@@ -8,6 +8,8 @@ import 'package:social_media_application/modules/log_in_screen/login_screen.dart
 import 'package:social_media_application/shared/constants.dart';
 import 'package:social_media_application/shared/network/local/cache_helper.dart';
 
+import 'cubit/state.dart';
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -22,7 +24,7 @@ void main() async{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AppCubit>(
+    return BlocProvider(
       create: (context) => AppCubit()..getUserData()..getPosts(),
       child: BlocConsumer<AppCubit, AppStates>(
         listener: (context, state) {},

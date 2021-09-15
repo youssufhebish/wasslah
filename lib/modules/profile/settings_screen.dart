@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:social_media_application/cubit/cubit.dart';
 import 'package:social_media_application/cubit/state.dart';
 import 'package:social_media_application/modules/edit_profile/edit_profile.dart';
+import 'package:social_media_application/modules/log_in_screen/login_screen.dart';
 import 'package:social_media_application/shared/constants.dart';
 import 'package:social_media_application/shared/styles/icons_broken.dart';
 
@@ -74,72 +75,6 @@ class ProfileScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.caption,
           ),
           SizedBox(height: 5.0,),
-          IntrinsicHeight(
-            child: Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: (){},
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('100', style: Theme.of(context).textTheme.bodyText1,),
-                        Text('posts'.toUpperCase(), style: Theme.of(context).textTheme.caption,),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: VerticalDivider(),
-                ),
-                Expanded(
-                  child: InkWell(
-                    onTap: (){},
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('100', style: Theme.of(context).textTheme.bodyText1,),
-                        Text('posts'.toUpperCase(), style: Theme.of(context).textTheme.caption,),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: VerticalDivider(),
-                ),
-                Expanded(
-                  child: InkWell(
-                    onTap: (){},
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('100', style: Theme.of(context).textTheme.bodyText1,),
-                        Text('posts'.toUpperCase(), style: Theme.of(context).textTheme.caption,),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: VerticalDivider(),
-                ),
-                Expanded(
-                  child: InkWell(
-                    onTap: (){},
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('100', style: Theme.of(context).textTheme.bodyText1,),
-                        Text('posts'.toUpperCase(), style: Theme.of(context).textTheme.caption,),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(5.0),
             child: Row(
@@ -171,8 +106,29 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-          )
-        ],
+          ),
+          Padding(padding: EdgeInsets.all(5.0),
+          child: Container(
+            width: double.infinity,
+            child: Expanded(
+              child: OutlinedButton(
+                  onPressed: () {
+                    AppCubit.get(context).model.uId = '';
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginScreen()),
+                        );
+                      },
+                  child: Text(
+                    'Log out'.toUpperCase(),
+                    style: TextStyle(
+                      color: kPrimaryColor,
+                    ),
+                  )),
+            ),
+          ),
+            ),
+          ],
       );
     },
       fallback: (context) => Center(child: CircularProgressIndicator()),
